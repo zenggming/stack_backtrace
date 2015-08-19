@@ -1,0 +1,33 @@
+Breakpoint 2, recursive_sum_0 (current_value=0) at stack_trace.c:85
+85      define_func(0);
+(gdb) s
+back_trace (stacks=0x7fffffffccb0, size=100) at stack_trace.c:16
+16        int    i, found = 0;
+(gdb) n
+19        current_frame = (struct stack_frame*)(__builtin_frame_address(0));
+(gdb) finish
+Run till exit from #0  back_trace (stacks=0x7fffffffccb0, size=100) at stack_trace.c:19
+0x000000000040076e in recursive_sum_0 (current_value=0) at stack_trace.c:85
+85      define_func(0);
+Value returned is $1 = 11
+(gdb) x /11xg stacks
+0x7fffffffccb0: 0x0000000000400634      0x0000000000400847
+0x7fffffffccc0: 0x000000000040066e      0x0000000000400903
+0x7fffffffccd0: 0x00000000004006a8      0x00000000004009bf
+0x7fffffffcce0: 0x00000000004006df      0x0000000000400a7b
+0x7fffffffccf0: 0x0000000000400713      0x0000000000400b37
+0x7fffffffcd00: 0x0000000000400b6d
+(gdb) bt 
+#0  0x000000000040076e in recursive_sum_0 (current_value=0) at stack_trace.c:85
+#1  0x0000000000400634 in recursive_sum_next (value=1) at stack_trace.c:70
+#2  0x0000000000400847 in recursive_sum_2 (current_value=2) at stack_trace.c:87
+#3  0x000000000040066e in recursive_sum_next (value=3) at stack_trace.c:72
+#4  0x0000000000400903 in recursive_sum_4 (current_value=4) at stack_trace.c:89
+#5  0x00000000004006a8 in recursive_sum_next (value=5) at stack_trace.c:74
+#6  0x00000000004009bf in recursive_sum_6 (current_value=6) at stack_trace.c:91
+#7  0x00000000004006df in recursive_sum_next (value=7) at stack_trace.c:76
+#8  0x0000000000400a7b in recursive_sum_8 (current_value=8) at stack_trace.c:93
+#9  0x0000000000400713 in recursive_sum_next (value=9) at stack_trace.c:78
+#10 0x0000000000400b37 in recursive_sum_10 (current_value=10) at stack_trace.c:95
+#11 0x0000000000400b6d in main () at stack_trace.c:100
+(gdb) 
